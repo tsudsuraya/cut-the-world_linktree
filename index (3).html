@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ツヅラヤ｜夜の机の実験ログ</title>
+<meta name="description" content="AI副業とものづくりの実験ログ。夜の机で、ステッカーや小さな自動化を試しています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+    --ink:#241c16;
+    --parchment:#f0e6d2;
+    --parchment-dim:#bcab90;
+    --accent:#d8a83f;
+    --accent-dim:rgba(216,168,63,.5);
+    --accent2:#6bab9c;
+    --accent2soft:rgba(107,171,156,.20);
+    --edge:rgba(240,230,210,.13);
+    --edge-accent:rgba(216,168,63,.38);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh; background:radial-gradient(120% 80% at 50% -10%, #3d2f22 0%, var(--ink) 55%, #170f0a 100%);
+  color:var(--parchment); font-family:"Noto Serif JP",serif;
+  font-weight:300; line-height:1.8; display:flex; justify-content:center;
+  padding:clamp(2.5rem,8vw,5rem) 1.25rem 3.5rem;
+  position:relative; overflow-x:hidden;
+}
+body::before{content:""; position:fixed; inset:0; pointer-events:none;
+  background-image:radial-gradient(1px 1px at 20% 30%,rgba(240,230,210,.22),transparent),radial-gradient(1px 1px at 75% 15%,rgba(107,171,156,.22),transparent),radial-gradient(1px 1px at 60% 70%,rgba(216,168,63,.24),transparent),radial-gradient(1px 1px at 30% 85%,rgba(240,230,210,.14),transparent),radial-gradient(1px 1px at 90% 55%,rgba(240,230,210,.16),transparent); opacity:.5;}
+.shelf{width:100%; max-width:480px; position:relative; z-index:1;
+  animation:rise .9s cubic-bezier(.2,.7,.2,1) both;}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.crest{text-align:center; margin-bottom:2.75rem;}
+.sigil{font-family:"Cormorant Garamond",serif; font-size:.72rem; letter-spacing:.42em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:1.1rem; padding-left:.42em;}
+.name{font-family:"Cormorant Garamond",serif; font-weight:500;
+  font-size:clamp(2.6rem,11vw,3.4rem); line-height:1; letter-spacing:.02em; margin-bottom:.5rem;}
+.name .kana{display:block; font-family:"Noto Serif JP",serif; font-weight:400;
+  font-size:.9rem; letter-spacing:.5em; color:var(--parchment-dim); margin-top:.85rem; padding-left:.5em;}
+.tagline{font-size:.82rem; color:var(--parchment-dim); line-height:2; margin-top:1.4rem;}
+.rule{width:1px; height:44px; margin:1.75rem auto 0;
+  background:linear-gradient(var(--accent), transparent); opacity:.55;}
+.stacks{display:flex; flex-direction:column; gap:.85rem;}
+.book{display:flex; align-items:center; gap:.95rem; text-decoration:none;
+  color:var(--parchment); background:linear-gradient(100deg,#2e2419,rgba(46,36,25,.55));
+  border:1px solid var(--edge); border-left:2px solid var(--edge-accent);
+  border-radius:9px; padding:1.05rem 1.25rem; position:relative; overflow:hidden;
+  transition:border-color .4s ease, transform .4s cubic-bezier(.2,.7,.2,1), background .4s ease;}
+.book::before{content:""; position:absolute; left:0; top:0; bottom:0; width:2px;
+  background:var(--accent); box-shadow:0 0 11px 1px rgba(216,168,63,.8); opacity:0; transition:opacity .4s ease;}
+.book:hover, .book:focus-visible{transform:translateX(4px); border-color:var(--accent-dim);
+  background:linear-gradient(100deg,#382b1d,rgba(56,43,29,.72)); outline:none;}
+.book:hover::before, .book:focus-visible::before{opacity:1}
+/* 斜めの断面：金の縁がアメジストを挟む3層。ホバーで中央から左右にこじ開ける。ロゴのv4切断と同構造 */
+.book::after{
+  content:""; position:absolute; top:-25%; bottom:-25%;
+  left:60%; width:12px; margin-left:-6px;
+  background:linear-gradient(90deg,
+    rgba(184,138,59,0) 0%,
+    rgba(184,138,59,0) 30%,
+    #b88a3b 37%, #d8a83f 41%,
+    #41264f 47%, #5a3568 50%, #41264f 53%,
+    #d8a83f 59%, #b88a3b 63%,
+    rgba(184,138,59,0) 70%,
+    rgba(184,138,59,0) 100%);
+  transform:rotate(38deg) scaleX(0);
+  transform-origin:center;
+  opacity:0;
+  transition:transform .5s cubic-bezier(.16,.8,.3,1), opacity .3s ease;
+  pointer-events:none;
+}
+.book:hover::after, .book:focus-visible::after{transform:rotate(38deg) scaleX(1); opacity:1;}
+.book .dot{width:7px; height:7px; border-radius:50%; flex:none;
+  background:var(--accent2); box-shadow:0 0 0 3px var(--accent2soft); transition:transform .4s ease;}
+.book:hover .dot, .book:focus-visible .dot{transform:scale(1.25)}
+.book .label{flex:1; display:flex; flex-direction:column; gap:.15rem;}
+.book .title{font-family:"Cormorant Garamond",serif; font-weight:600;
+  font-size:1.16rem; letter-spacing:.01em; line-height:1.2;}
+.book .sub{font-size:.72rem; color:var(--parchment-dim); letter-spacing:.04em;}
+.book .arrow{font-family:"Cormorant Garamond",serif; color:var(--parchment-dim);
+  font-size:1.1rem; transition:color .4s ease, transform .4s ease;}
+.book:hover .arrow, .book:focus-visible .arrow{color:var(--accent); transform:translateX(3px);}
+.chapter{font-family:"Cormorant Garamond",serif; font-size:.68rem; letter-spacing:.34em;
+  text-transform:uppercase; color:var(--parchment-dim); margin:1.9rem 0 .35rem .2rem;
+  display:flex; align-items:center; gap:.7rem;}
+.chapter::after{content:""; flex:1; height:1px; background:var(--edge);}
+.chapter:first-child{margin-top:0}
+.colophon{text-align:center; margin-top:3rem; font-size:.68rem; letter-spacing:.06em;
+  color:var(--parchment-dim); line-height:2;}
+.colophon .mark{font-family:"Cormorant Garamond",serif; font-style:italic;
+  color:var(--accent2); font-size:.82rem; display:block; margin-bottom:.5rem; opacity:.95;}
+@media (prefers-reduced-motion:reduce){
+  .shelf{animation:none} .book, .book .arrow, .book .dot, .book::after{transition:none}}
+
+
+.mark{display:block; width:96px; height:96px; margin:0 auto 1.3rem;
+  filter:drop-shadow(0 0 12px rgba(216,168,63,.22));}
+.crest .name{font-size:clamp(2.1rem,8.5vw,2.7rem); font-style:italic; font-weight:500; letter-spacing:.005em;}
+.crest .sigil{margin-bottom:.9rem; letter-spacing:.5em; padding-left:.5em;}
+</style></head><body>
+
+  <main class="shelf">
+    <header class="crest">
+      <svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">CutTheWorld mark — two color</title>
+  <desc id="desc">A blackened ring severed twice, with aged-brass edges, scale marks, and a muted amethyst cut.</desc>
+  <defs>
+    <mask id="ring-cut" maskUnits="userSpaceOnUse">
+      <rect width="256" height="256" fill="white"/>
+      <path d="M38 218 218 38" stroke="black" stroke-width="10"/>
+    </mask>
+    <mask id="annulus-only" maskUnits="userSpaceOnUse">
+      <rect width="256" height="256" fill="black"/>
+      <circle cx="128" cy="128" r="104" fill="white"/>
+      <circle cx="128" cy="128" r="60" fill="black"/>
+    </mask>
+    <path id="tick" d="M128 25v11"/>
+  </defs>
+  <g mask="url(#annulus-only)">
+    <path d="M38 218 218 38" stroke="#b88a3b" stroke-width="10.5"/>
+    <path d="M38 218 218 38" stroke="#41264f" stroke-width="5"/>
+    <circle cx="128" cy="128" r="82" fill="none" stroke="#1b1815" stroke-width="43" mask="url(#ring-cut)"/>
+  </g>
+  <g fill="none" stroke="#b88a3b">
+    <circle cx="128" cy="128" r="103" stroke-width="1.8" mask="url(#ring-cut)"/>
+    <circle cx="128" cy="128" r="61" stroke-width="1.5" mask="url(#ring-cut)" opacity=".82"/>
+    <g stroke-width="1.6" opacity=".8">
+      <path d="M128 25v11" transform="rotate(72 128 128)"/><path d="M128 25v11" transform="rotate(81 128 128)"/>
+      <path d="M128 25v11" transform="rotate(90 128 128)"/><path d="M128 25v11" transform="rotate(99 128 128)"/>
+      <path d="M128 25v11" transform="rotate(108 128 128)"/>
+      <path d="M128 25v11" transform="rotate(252 128 128)"/><path d="M128 25v11" transform="rotate(261 128 128)"/>
+      <path d="M128 25v11" transform="rotate(270 128 128)"/><path d="M128 25v11" transform="rotate(279 128 128)"/>
+      <path d="M128 25v11" transform="rotate(288 128 128)"/>
+    </g>
+  </g>
+</svg>
+
+      <div class="sigil">断面研究所</div>
+      <h1 class="name">cut the world</h1>
+      <p class="tagline">
+        AI副業とものづくりの実験ログ。<br>
+        夜の机で、世界を少しずつ切り出しています。
+      </p>
+      <div class="rule"></div>
+    </header>
+    <nav class="stacks">
+      <div class="chapter">Reading Room</div>
+      <a class="book" href="https://note.com/tsudsuraya" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="title">note</span>
+        <span class="sub">実験ログとエッセイ・本館</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+      <a class="book" href="https://note.com/tsudsuraya/n/n524d9aebe1f4" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="title">最新記事</span>
+        <span class="sub">Notionを作りかけた男の話</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+      <div class="chapter">Workshop</div>
+      <a class="book" href="https://www.etsy.com/shop/ChasingEchoesstudio" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="title">Chasing Echoes</span>
+        <span class="sub">Etsy・お守りのステッカー工房</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+      <a class="book" href="https://www.youtube.com/@nemurenai_koshoshitsu" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="title">眠れない夜の古書室</span>
+        <span class="sub">YouTube・夜の音のための一室</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+    </nav>
+    <footer class="colophon">
+      <span class="mark">&#10022;</span>
+      散らかったまま、置いてあります。<br>
+      主：ツヅラヤ ・ Sapporo
+    </footer>
+  </main>
+
+</body></html>
