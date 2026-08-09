@@ -81,6 +81,10 @@ body::before{content:""; position:fixed; inset:0; pointer-events:none;
 .book .title{font-family:"Cormorant Garamond",serif; font-weight:600;
   font-size:1.16rem; letter-spacing:.01em; line-height:1.2;}
 .book .sub{font-size:.8rem; color:var(--parchment-dim); letter-spacing:.04em;}
+.book .titleline{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap;}
+.book .tag{font-family:"Cormorant Garamond",serif; font-size:.7rem; letter-spacing:.14em;
+  color:var(--accent); border:1px solid var(--edge-accent); border-radius:3px;
+  padding:.06rem .42rem; white-space:nowrap; opacity:.9;}
 .book .arrow{font-family:"Cormorant Garamond",serif; color:var(--parchment-dim);
   font-size:1.1rem; transition:color .4s ease, transform .4s ease;}
 .book:hover .arrow, .book:focus-visible .arrow{color:var(--accent); transform:translateX(3px);}
@@ -149,6 +153,37 @@ body::before{content:""; position:fixed; inset:0; pointer-events:none;
     </header>
     <nav class="stacks">
       <div class="chapter">Reading Room</div>
+      <a class="book" href="https://note.com/tsudsuraya/n/nbbcb11a8995f" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="title">はじめての方へ</span>
+        <span class="sub">実験ログの歩き方</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+      <a class="book" href="https://note.com/tsudsuraya/n/na69275259c78" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="title">実験ログ 第一部</span>
+        <span class="sub">10.56ドルと白狐ステッカーまでの記録</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+      <a class="book" href="https://note.com/tsudsuraya/n/n67a1ed28b38e" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="title">実験ログ 第二部</span>
+        <span class="sub">20分の動画を、手作業で公開するまで</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+      <a class="book" href="https://note.com/tsudsuraya/n/n6ba8abc70d80" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="title">実験ログ 第三部</span>
+        <span class="sub">noteの管理でNotionを発明しかけた話</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+      <a class="book" href="https://note.com/tsudsuraya/n/n13a233a63002" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span class="label"><span class="titleline"><span class="title">明細を公開した記事</span><span class="tag">&yen;1,000</span></span>
+        <span class="sub">踊った側の、カード明細と実質時給</span></span>
+        <span class="arrow">&rsaquo;</span>
+      </a>
+      <div class="chapter">Desk</div>
       <a class="book" href="https://note.com/tsudsuraya" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">note</span>
