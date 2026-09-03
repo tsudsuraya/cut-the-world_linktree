@@ -159,6 +159,58 @@ test("authorized summary and CSV export are available", async () => {
   assert.equal(await csv.text(), "source,link_id,clicks\r\nnote.com,etsy,5");
 });
 
+test("admin requires Basic authentication and advertises its realm", async () => {
+  const url = "https://worker.example/admin";
+  const noSecret = await handleRequest(new Request(url), {DB: mockDb()});
+  assert.equal(noSecret.status, 503);
+
+  const noCredentials = await handleRequest(new Request(url), {DB: mockDb(), ADMIN_PASSWORD: "correct"});
+  assert.equal(noCredentials.status, 401);
+  assert.match(noCredentials.headers.get("WWW-Authenticate"), /^Basic /);
+
+  const wrongCredentials = await handleRequest(new Request(url, {
+    headers: {Authorization: `Basic ${btoa("tsudsuraya:wrong")}`}
+  }), {DB: mockDb(), ADMIN_PASSWORD: "correct"});
+  assert.equal(wrongCredentials.status, 401);
+});
+
+test("authorized admin renders correct D1 aggregates without raw events", async () => {
+  const results = [
+    [{clicks: 2}],
+    [{clicks: 7}],
+    [{clicks: 30}],
+    [{link_id: "latest_note", clicks: 12}, {link_id: "etsy", clicks: 8}],
+    [{source: "note.com", clicks: 19}],
+    [{source: "note.com", link_id: "etsy", clicks: 5}],
+    [{date: "2026-09-04", clicks: 2}],
+    [{last_event: "2026-09-04T12:34:56.000Z"}]
+  ];
+  const db = mockDb();
+  db.batch = async (statements) => {
+    db.reads.push(...statements.map(({sql, params}) => ({sql, params})));
+    return results.map((rows) => ({success: true, results: rows}));
+  };
+  const response = await handleRequest(new Request("https://worker.example/admin", {
+    headers: {Authorization: `Basic ${btoa("tsudsuraya:correct")}`}
+  }), {DB: db, ADMIN_PASSWORD: "correct"});
+  const html = await response.text();
+
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("Cache-Control"), "no-store");
+  assert.equal(response.headers.get("X-Robots-Tag"), "noindex, nofollow");
+  assert.match(html, />2<\/strong>/);
+  assert.match(html, />7<\/strong>/);
+  assert.match(html, />30<\/strong>/);
+  assert.match(html, /最新記事 \(latest_note\)/);
+  assert.match(html, /note\.com/);
+  assert.match(html, /Etsy \(etsy\)/);
+  assert.match(html, /2026-09-04 21:34:56/);
+  assert.doesNotMatch(html, /clicked_url|landing_page|event_id/);
+  assert.equal(db.reads.length, 8);
+  assert.deepEqual(db.reads[1].params, ["2026-08-29", "2026-09-04"]);
+  assert.deepEqual(db.reads[2].params, ["2026-08-06", "2026-09-04"]);
+});
+
 test("CSV values are escaped", () => {
   assert.equal(toCsv(["name", "count"], [{name: "a,b", count: 2}]), 'name,count\r\n"a,b",2');
 });
