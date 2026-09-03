@@ -1,0 +1,23 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "cut-the-world-click-analytics",
+	"main": "src/index.js",
+	"compatibility_date": "2026-09-03",
+	"vars": {
+		"ALLOWED_ORIGIN": "https://tsudsuraya.github.io",
+		"RETENTION_DAYS": "180"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "cut-the-world-click-analytics",
+			"database_id": "272c8bf0-039b-44f2-a19c-a3b6afc51fcb",
+			"migrations_dir": "migrations"
+		}
+	],
+	"triggers": {
+		"crons": [
+			"20 18 * * *"
+		]
+	}
+}

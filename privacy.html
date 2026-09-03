@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy｜CutTheWorld</title>
+<meta name="description" content="CutTheWorldリンクページのアクセス解析とプライバシーについて。">
+<style>
+:root{--ink:#241c16;--parchment:#f0e6d2;--dim:#bcab90;--accent:#d8a83f;--edge:rgba(240,230,210,.13)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(120% 80% at 50% -10%,#3d2f22 0%,var(--ink) 55%,#170f0a 100%);color:var(--parchment);font-family:serif;line-height:1.9;padding:3rem 1.25rem}
+main{max-width:680px;margin:0 auto}
+h1{font-weight:500;font-size:2rem;margin:0 0 .25rem}
+.updated{color:var(--dim);font-size:.78rem;margin-bottom:2.5rem}
+h2{font-size:1.05rem;font-weight:500;color:var(--accent);margin:2rem 0 .5rem}
+p,li{font-size:.92rem}
+ul{padding-left:1.4rem}
+a{color:var(--parchment);text-underline-offset:.2em}
+.back{display:inline-block;margin-top:2.5rem;color:var(--dim)}
+</style></head><body>
+<main>
+  <h1>Privacy</h1>
+  <p class="updated">最終更新日：2026年9月4日</p>
+
+  <p>CutTheWorldのリンクページでは、ページ全体の利用状況を把握するためのCloudflare Web Analyticsと、外部リンクの利用状況を把握するための匿名クリック解析を使用します。</p>
+
+  <h2>取得する情報</h2>
+  <p>Cloudflare Web Analyticsでは、ページ表示、参照元、端末・ブラウザ・OSの大まかな種類、Webパフォーマンスなどが集計されます。</p>
+  <p>外部リンクがクリックされた場合、クリック時刻、リンクを表す固定ID、リンク先URL、当ページのパス、参照元のホスト名、UTM source・medium・campaign・content・term、mobile・tablet・desktop程度の端末区分を記録します。</p>
+  <p>リンク先URL、参照元、当ページの情報からqueryとhashを除きます。UTMパラメータは流入元の集計に必要な項目だけを個別に保存します。</p>
+
+  <h2>匿名クリック解析で保存しない情報</h2>
+  <ul>
+    <li>生のIPアドレス</li>
+    <li>詳細なUser-Agent</li>
+    <li>Cookie</li>
+    <li>fingerprint</li>
+    <li>永続的なvisitor IDまたはsession ID</li>
+    <li>広告配信を目的とする追跡情報</li>
+  </ul>
+
+  <h2>利用目的と保存期間</h2>
+  <p>情報は、どの流入元から来た訪問がどのリンクを利用したかを日次・期間別に集計し、掲載内容の改善に役立てるために使用します。個人を特定する目的では使用しません。</p>
+  <p>クリックの生イベントは180日間保持し、それより古いデータは日次処理で削除します。</p>
+
+  <h2>ブラウザ内の一時保存</h2>
+  <p>同じタブ内で流入情報を保つため、UTMなどの流入属性をsessionStorageへ一時保存する場合があります。識別子は保存せず、通常はタブを閉じると削除されます。</p>
+
+  <h2>利用サービス</h2>
+  <p>アクセス解析と匿名クリック解析の処理にはCloudflareのサービスを利用します。通信処理に伴う情報の取扱いを含むCloudflare側の方針については、<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>をご確認ください。</p>
+
+  <h2>お問い合わせ</h2>
+  <p>本ページに関するお問い合わせは、<a href="https://note.com/tsudsuraya" target="_blank" rel="noopener">noteプロフィール</a>からご連絡ください。</p>
+
+  <a class="back" href="./">← CutTheWorldへ戻る</a>
+</main>
+</body></html>

@@ -6,7 +6,7 @@
 ブランドの正式表記は **CutTheWorld**（URL・リポジトリ名は cut-the-world_linktree のまま変更しない）。
 
 - **公開URL**: https://tsudsuraya.github.io/cut-the-world_linktree/
-- **本体ファイル**: `index.html`（単一HTML・外部依存は Google Fonts と Cloudflare Analytics のみ）
+- **本体ファイル**: `index.html`（単一HTML・外部依存は Google Fonts、Cloudflare Analytics、匿名クリック解析Workerのみ）
 
 ## デプロイ手順
 
@@ -29,5 +29,10 @@
 
 ## 設計思想
 
-単一HTML・サーバー依存なし・ブラウザローカル完結。
-この方針を崩す提案（サーバー化・フレームワーク導入等）はしないこと。
+公開ページは単一HTMLを維持し、フレームワーク化やWebアプリ化をしない。
+例外として、個人を識別しないoutbound click解析専用のCloudflare Worker / D1のみ利用できる。
+既存Cloudflare Web Analyticsは削除せず、訪問全体の解析として維持する。
+
+クリック解析では、生IP、詳細User-Agent、Cookie、fingerprint、永続visitor/session IDを保存しない。
+D1は「クリックした訪問について、流入属性から押下先」を集計する用途に限定する。
+Worker/D1の本番作成・migration・secret登録・デプロイは、ユーザーの明示的な承認後に行うこと。

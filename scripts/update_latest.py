@@ -46,7 +46,7 @@ def build_block(title, link):
     l = html.escape(link)
     return "\n".join([
         MARKER_START,
-        f'      <a class="book" href="{l}" target="_blank" rel="noopener">',
+        f'      <a class="book" data-link-id="latest_note" href="{l}" target="_blank" rel="noopener">',
         '        <span class="dot"></span>',
         '        <span class="label"><span class="title">最新記事</span>',
         f'        <span class="sub">{t}</span></span>',

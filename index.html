@@ -97,6 +97,9 @@ body::before{content:""; position:fixed; inset:0; pointer-events:none;
   color:var(--parchment-dim); line-height:2;}
 .colophon .mark{font-family:"Cormorant Garamond",serif; font-style:italic;
   color:var(--accent2); font-size:.82rem; display:block; margin-bottom:.5rem; opacity:.95;}
+.privacy-link{display:inline-block; margin-top:.45rem; color:var(--parchment-dim);
+  font-size:.64rem; text-underline-offset:.2em; opacity:.72;}
+.privacy-link:hover,.privacy-link:focus-visible{color:var(--parchment); opacity:1;}
 @media (prefers-reduced-motion:reduce){
   .shelf{animation:none} .book, .book .arrow, .book .dot, .book::after{transition:none}}
 
@@ -153,45 +156,45 @@ body::before{content:""; position:fixed; inset:0; pointer-events:none;
     </header>
     <nav class="stacks">
       <div class="chapter">Reading Room</div>
-      <a class="book" href="https://note.com/tsudsuraya/n/nbbcb11a8995f" target="_blank" rel="noopener">
+      <a class="book" data-link-id="intro_note" href="https://note.com/tsudsuraya/n/nbbcb11a8995f" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">はじめての方へ</span>
         <span class="sub">実験ログの歩き方</span></span>
         <span class="arrow">&rsaquo;</span>
       </a>
-      <a class="book" href="https://note.com/tsudsuraya/n/na69275259c78" target="_blank" rel="noopener">
+      <a class="book" data-link-id="experiment_log_1" href="https://note.com/tsudsuraya/n/na69275259c78" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">実験ログ 第一部</span>
         <span class="sub">10.56ドルと白狐ステッカーまでの記録</span></span>
         <span class="arrow">&rsaquo;</span>
       </a>
-      <a class="book" href="https://note.com/tsudsuraya/n/n67a1ed28b38e" target="_blank" rel="noopener">
+      <a class="book" data-link-id="experiment_log_2" href="https://note.com/tsudsuraya/n/n67a1ed28b38e" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">実験ログ 第二部</span>
         <span class="sub">20分の動画を、手作業で公開するまで</span></span>
         <span class="arrow">&rsaquo;</span>
       </a>
-      <a class="book" href="https://note.com/tsudsuraya/n/n6ba8abc70d80" target="_blank" rel="noopener">
+      <a class="book" data-link-id="experiment_log_3" href="https://note.com/tsudsuraya/n/n6ba8abc70d80" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">実験ログ 第三部</span>
         <span class="sub">noteの管理でNotionを発明しかけた話</span></span>
         <span class="arrow">&rsaquo;</span>
       </a>
-      <a class="book" href="https://note.com/tsudsuraya/n/n13a233a63002" target="_blank" rel="noopener">
+      <a class="book" data-link-id="billing_note" href="https://note.com/tsudsuraya/n/n13a233a63002" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="titleline"><span class="title">明細を公開した記事</span><span class="tag">&yen;1,000</span></span>
         <span class="sub">踊った側の、カード明細と実質時給</span></span>
         <span class="arrow">&rsaquo;</span>
       </a>
       <div class="chapter">Desk</div>
-      <a class="book" href="https://note.com/tsudsuraya" target="_blank" rel="noopener">
+      <a class="book" data-link-id="note_top" href="https://note.com/tsudsuraya" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">note</span>
         <span class="sub">実験ログとエッセイ・本館</span></span>
         <span class="arrow">&rsaquo;</span>
       </a>
       <!-- LATEST_ARTICLE_START -->
-      <a class="book" href="https://note.com/tsudsuraya/n/n42c9511ba746" target="_blank" rel="noopener">
+      <a class="book" data-link-id="latest_note" href="https://note.com/tsudsuraya/n/n42c9511ba746" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">最新記事</span>
         <span class="sub">AIに小説を書かせたら、4日で書けて440箇所直した【AI副業実験ログ】</span></span>
@@ -199,13 +202,13 @@ body::before{content:""; position:fixed; inset:0; pointer-events:none;
       </a>
       <!-- LATEST_ARTICLE_END -->
       <div class="chapter">Workshop</div>
-      <a class="book" href="https://www.etsy.com/shop/ChasingEchoesstudio" target="_blank" rel="noopener">
+      <a class="book" data-link-id="etsy" href="https://www.etsy.com/shop/ChasingEchoesstudio" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">Chasing Echoes</span>
         <span class="sub">Etsy・お守りのステッカー工房</span></span>
         <span class="arrow">&rsaquo;</span>
       </a>
-      <a class="book" href="https://www.youtube.com/@nemurenai_koshoshitsu" target="_blank" rel="noopener">
+      <a class="book" data-link-id="youtube" href="https://www.youtube.com/@nemurenai_koshoshitsu" target="_blank" rel="noopener">
         <span class="dot"></span>
         <span class="label"><span class="title">眠れない夜の古書室</span>
         <span class="sub">YouTube・夜の音のための一室</span></span>
@@ -215,9 +218,122 @@ body::before{content:""; position:fixed; inset:0; pointer-events:none;
     <footer class="colophon">
       <span class="mark">&#10022;</span>
       散らかったまま、置いてあります。<br>
-      主：ツヅラヤ ・ Sapporo
+      主：ツヅラヤ ・ Sapporo<br>
+      <a class="privacy-link" href="privacy.html">Privacy</a>
     </footer>
   </main>
 
+<script>
+(() => {
+  "use strict";
+
+  const ANALYTICS_ENDPOINT = "https://cut-the-world-click-analytics.tsudsura.workers.dev/v1/events/click";
+  const ATTRIBUTION_KEY = "ctw_click_attribution_v1";
+  const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+
+  const cleanText = (value, max = 200) =>
+    String(value || "").replace(/[\u0000-\u001f\u007f]/g, "").trim().slice(0, max);
+
+  const hostnameOf = (value) => {
+    if (!value) return "";
+    try { return new URL(value).hostname.toLowerCase(); } catch { return ""; }
+  };
+
+  const normalizedOutboundUrl = (value) => {
+    try {
+      const url = new URL(value);
+      url.search = "";
+      url.hash = "";
+      return url.toString();
+    } catch {
+      return "";
+    }
+  };
+
+  const currentAttribution = () => {
+    const params = new URLSearchParams(location.search);
+    const data = {
+      landing_page: cleanText(location.pathname, 300),
+      referrer_host: cleanText(hostnameOf(document.referrer), 253)
+    };
+    for (const key of UTM_KEYS) data[key] = cleanText(params.get(key), 200) || null;
+    return data;
+  };
+
+  const getAttribution = () => {
+    try {
+      const saved = sessionStorage.getItem(ATTRIBUTION_KEY);
+      if (saved) return JSON.parse(saved);
+      const data = currentAttribution();
+      sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(data));
+      return data;
+    } catch {
+      return currentAttribution();
+    }
+  };
+
+  const deviceType = () => {
+    if (navigator.userAgentData && navigator.userAgentData.mobile) return "mobile";
+    const touch = navigator.maxTouchPoints > 0;
+    if (touch && Math.min(screen.width, screen.height) <= 820) return "mobile";
+    if (touch && Math.min(screen.width, screen.height) <= 1180) return "tablet";
+    return "desktop";
+  };
+
+  const eventId = () => {
+    if (crypto.randomUUID) return crypto.randomUUID();
+    const bytes = crypto.getRandomValues(new Uint8Array(16));
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    const hex = [...bytes].map((byte) => byte.toString(16).padStart(2, "0"));
+    return `${hex.slice(0, 4).join("")}-${hex.slice(4, 6).join("")}-${hex.slice(6, 8).join("")}-${hex.slice(8, 10).join("")}-${hex.slice(10).join("")}`;
+  };
+
+  const sendClick = (anchor) => {
+    const clickedUrl = normalizedOutboundUrl(anchor.href);
+    if (!clickedUrl) return;
+
+    const payload = JSON.stringify({
+      ...getAttribution(),
+      event_id: eventId(),
+      link_id: anchor.dataset.linkId,
+      clicked_url: clickedUrl,
+      device_type: deviceType()
+    });
+
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(ANALYTICS_ENDPOINT, payload)) return;
+    } catch {}
+
+    try {
+      fetch(ANALYTICS_ENDPOINT, {
+        method: "POST",
+        body: payload,
+        headers: {"Content-Type": "text/plain;charset=UTF-8"},
+        credentials: "omit",
+        keepalive: true,
+        mode: "cors"
+      }).catch(() => {});
+    } catch {}
+  };
+
+  const trackedAnchor = (event) => {
+    const target = event.target instanceof Element ? event.target.closest("a[data-link-id]") : null;
+    return target instanceof HTMLAnchorElement ? target : null;
+  };
+
+  document.addEventListener("click", (event) => {
+    if (event.button !== 0) return;
+    const anchor = trackedAnchor(event);
+    if (anchor) sendClick(anchor);
+  }, true);
+
+  document.addEventListener("auxclick", (event) => {
+    if (event.button !== 1) return;
+    const anchor = trackedAnchor(event);
+    if (anchor) sendClick(anchor);
+  }, true);
+})();
+</script>
 <!-- Cloudflare Web Analytics --><script defer type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1d38a89ca88d4a04947b88b458768330"}'></script><!-- End Cloudflare Web Analytics -->
 </body></html>
