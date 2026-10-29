@@ -2,24 +2,37 @@ import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import test from "node:test";
 
+import {normalizedClickedUrl} from "../analytics-worker/src/index.js";
+
 const root = new URL("../", import.meta.url);
 
 test("all outbound cards have stable unique link IDs", async () => {
   const html = await readFile(new URL("index.html", root), "utf8");
   const expected = [
+    "kindle_novel",
+    "etsy",
+    "billing_note",
+    "membership",
     "intro_note",
     "experiment_log_1",
     "experiment_log_2",
     "experiment_log_3",
-    "billing_note",
     "note_top",
     "latest_note",
-    "etsy",
     "youtube"
   ];
   const actual = [...html.matchAll(/<a class="book" data-link-id="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(actual, expected);
   assert.equal(new Set(actual).size, actual.length);
+});
+
+test("every outbound card is accepted by the click analytics allowlist", async () => {
+  const html = await readFile(new URL("index.html", root), "utf8");
+  const cards = [...html.matchAll(/<a class="book" data-link-id="([^"]+)" href="([^"]+)"/g)];
+  assert.ok(cards.length > 0);
+  for (const [, linkId, href] of cards) {
+    assert.notEqual(normalizedClickedUrl(href, linkId), null, `${linkId} ${href}`);
+  }
 });
 
 test("latest-note updater preserves latest_note ID", async () => {

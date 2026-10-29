@@ -78,6 +78,19 @@ test("clicked URL is allowlisted and stripped of query/hash", () => {
   assert.equal(normalizedClickedUrl("https://note.com/tsudsuraya", "unknown"), null);
 });
 
+test("shop links are allowlisted to their exact destinations", () => {
+  assert.equal(
+    normalizedClickedUrl("https://www.amazon.co.jp/dp/B0HKCP4JFL?ref=x", "kindle_novel"),
+    "https://www.amazon.co.jp/dp/B0HKCP4JFL"
+  );
+  assert.equal(normalizedClickedUrl("https://www.amazon.co.jp/dp/B000000000", "kindle_novel"), null);
+  assert.equal(
+    normalizedClickedUrl("https://note.com/tsudsuraya/n/ne4d6771555a5", "membership"),
+    "https://note.com/tsudsuraya/n/ne4d6771555a5"
+  );
+  assert.equal(normalizedClickedUrl("https://note.com/tsudsuraya/n/n13a233a63002", "membership"), null);
+});
+
 test("validated event uses server time and stores only coarse fields", () => {
   const now = new Date("2026-09-03T16:30:00.000Z");
   const event = validateClickPayload(basePayload, now);

@@ -5,6 +5,8 @@ const MAX_REPORT_DAYS = 366;
 const ADMIN_USERNAME = "tsudsuraya";
 
 const LINK_LABELS = Object.freeze({
+  kindle_novel: "Kindle小説",
+  membership: "メンバーシップ",
   intro_note: "はじめに",
   experiment_log_1: "実験記録 1",
   experiment_log_2: "実験記録 2",
@@ -17,6 +19,8 @@ const LINK_LABELS = Object.freeze({
 });
 
 const LINK_RULES = Object.freeze({
+  kindle_novel: {hostname: "www.amazon.co.jp", pathname: "/dp/B0HKCP4JFL"},
+  membership: {hostname: "note.com", pathname: "/tsudsuraya/n/ne4d6771555a5"},
   intro_note: {hostname: "note.com", pathname: "/tsudsuraya/n/nbbcb11a8995f"},
   experiment_log_1: {hostname: "note.com", pathname: "/tsudsuraya/n/na69275259c78"},
   experiment_log_2: {hostname: "note.com", pathname: "/tsudsuraya/n/n67a1ed28b38e"},
