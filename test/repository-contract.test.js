@@ -11,6 +11,7 @@ test("all outbound cards have stable unique link IDs", async () => {
   const expected = [
     "kindle_novel",
     "etsy",
+    "rakuten_room",
     "billing_note",
     "membership",
     "intro_note",

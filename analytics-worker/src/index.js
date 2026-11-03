@@ -15,6 +15,7 @@ const LINK_LABELS = Object.freeze({
   note_top: "note",
   latest_note: "最新記事",
   etsy: "Etsy",
+  rakuten_room: "楽天ROOM",
   youtube: "YouTube"
 });
 
@@ -29,6 +30,7 @@ const LINK_RULES = Object.freeze({
   note_top: {hostname: "note.com", pathname: "/tsudsuraya"},
   latest_note: {hostname: "note.com", pathnamePattern: /^\/tsudsuraya\/n\/n[a-zA-Z0-9]+$/},
   etsy: {hostname: "www.etsy.com", pathname: "/shop/ChasingEchoesstudio"},
+  rakuten_room: {hostname: "room.rakuten.co.jp", pathname: "/cuttheworld"},
   youtube: {hostname: "www.youtube.com", pathname: "/@nemurenai_koshoshitsu"}
 });
 
