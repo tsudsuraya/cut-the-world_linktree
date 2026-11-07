@@ -12,6 +12,7 @@ test("all outbound cards have stable unique link IDs", async () => {
     "kindle_novel",
     "etsy",
     "rakuten_room",
+    "room_kosodate",
     "billing_note",
     "membership",
     "intro_note",
